@@ -1,15 +1,12 @@
-
-
-
 const pokemonInfo = document.getElementById("pokemonInfo")
 const button = document.getElementById("get-pokemon")
 
 // nombre (name)ss, imagen(sprites[hay varios])ss, tipo(type[puede haber varios]), altura(height) y peso(weight)
 
 const getPokemon = (pokemon) => {
-    return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
     .then((response) => {
-        if(response != data.ok){
+        if(!response.ok){
             throw new Error("Error 404")
         }
         else{
@@ -18,10 +15,10 @@ const getPokemon = (pokemon) => {
     })
     .then(data => {
             let template = `<img src=${data.sprites.front_default} alt=${data.name} image>
-                            <h2><span>Nombre: </span>${data.name}
-                            <p><span>Altura: </span>${data.height}<p>
-                            <p><span>Peso: </span>${data.weight}
-                            <p><span>Tipo/s: </span> ${data.types.map(typeInfo => typeInfo.type.name).join(', ')}`
+                            <h2><span>Name: </span>${data.name}</h2>
+                            <p><span>Height: </span>${data.height}</p>
+                            <p><span>Weight: </span>${data.weight}</p>
+                            <p><span>Type/s: </span> ${data.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>`
             pokemonInfo.innerHTML = template;
             return data
         })
@@ -34,7 +31,6 @@ const getPokemon = (pokemon) => {
 button.addEventListener("click", () => {
     const select = document.getElementById("pokemon-select").value
     if(select !== ""){
-        let hola = getPokemon(select)
-        console.log(hola)
+        getPokemon(select)
     }
 })
