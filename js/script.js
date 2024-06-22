@@ -15,7 +15,6 @@ const getPokemon = (pokemon) => {
         }
     })
     .then(data => {
-            console.log(data)
             let template = `<div id="imagePokemon">
                                 <img src=${data.sprites.front_default} alt=${data.name} />
                                 <img src=${data.sprites.front_shiny} alt=${data.name} />
@@ -35,7 +34,6 @@ const getPokemon = (pokemon) => {
 fetch("https://pokeapi.co/api/v2/pokemon/")
     .then(res => res.json())
     .then((data) => {
-        console.log(data)
         data.results.forEach(pokemon => {
             select.innerHTML += `<option value=${pokemon.name}>${pokemon.name}</option>`
         })
